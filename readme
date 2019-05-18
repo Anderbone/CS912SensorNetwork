@@ -1,0 +1,99 @@
+proposer.c: the firmware for proposer
+
+receiver.c: the firmware for other motes
+
+readcooja.py: read the simulation output, show all average value for each mote, calculate the latency and the number of messages.
+How to use: 'python readcooja.py COOJA.testlog'
+
+COOJA.testlog: one example of the simulation output.(the output of Running COOJA without GUI)
+
+runcooja.js: the script for running COOJA without GUI
+
+1. Open Cooja, when choose contiki process/firmware, select proposer.c, add 3 motes.(If you don't want 3 proposers, you need to change the original code, see below)
+2. Choose contiki process/firmware, select receiver.c, add 61 motes.
+3. In Cooja GUI, select Tools-simulation script editor-File-load example script-just log all printf and timeout. Change Timeout(60000) to Timeout(100000), to ensure all motes get correct average value in the end.
+4. In simulation script editor, select run-save simulation and run with script, to start Cooja without GUI.
+5. There will be a COOJA.testlog in /contiki/tools/cooja/build, copy it to the same directory with readcooja.py
+6. Open a terminal, run 'python readcooja.py COOJA.testlog'
+7. It will show all average value for each mote, the latency and the number of messages. Copy it to excel to get the straight line for question1.
+
+
+Change proposer number:
+(If you change the number of proposers(from 1 to 5, default is 3), you need to change both .c files. ) 
+
+How to change: find the code below in proposer.c and receiver.c(2 locations each), make the count == equal to the number of proposers.
+
+ if(count == 3){ 
+      printf("ok"); 
+      printf("\n");
+ }
+
+The output for this example testlog:
+
+python readcooja.py COOJA.testlog
+1 67
+2 67
+3 67
+4 67
+5 67
+6 67
+7 67
+8 67
+9 67
+10 67
+11 67
+12 67
+13 67
+14 67
+15 67
+16 67
+17 67
+18 67
+19 67
+20 67
+21 67
+22 67
+23 67
+24 67
+25 67
+26 67
+27 67
+28 67
+29 67
+30 67
+31 67
+32 67
+33 67
+34 67
+35 67
+36 67
+37 67
+38 67
+39 67
+40 67
+41 67
+42 67
+43 67
+44 67
+45 67
+46 67
+47 67
+48 67
+49 67
+50 67
+51 67
+52 67
+53 67
+54 67
+55 67
+56 67
+57 67
+58 67
+59 67
+60 67
+61 67
+62 67
+63 67
+64 67
+latency(time when all motes get correct number): 53786348
+total number of message during this simulation: 2679
